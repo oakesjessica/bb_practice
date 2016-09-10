@@ -57,7 +57,7 @@ router.post('/todos', function(req, res) {
       console.log('PG Connection Error /todos', err);
       res.status(500).send(err);
     } else {
-      client.query("INSERT INTO tasks (tasks) " +
+      client.query("INSERT INTO tasks (task) " +
       "VALUES ($1) " +
       "ON CONFLICT DO NOTHING " +
       "RETURNING *;", [task], function(err, result) {
