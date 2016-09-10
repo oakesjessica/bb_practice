@@ -1,5 +1,19 @@
 doctype html
 html
   head
+    script(src='./vendors/underscore/underscore-min.js')
+    script(src='./vendors/jquery/dist/jquery.min.js')
+    script(src='./vendors/backbone/backbone-min.js')
+    //- script(src='./vendors/backbone.marionette/lib/backbone.marionette.min.js')
+
+
+    script(src='./assets/js/main.min.js')
   body
-    h1 To Do Backbone
+    h1 To Do
+    form(action='/todos' method='post')
+      input(type='text' name='task' required)
+      button(type='submit') Submit
+
+
+    script(id='quoteTemplate' type='text/template')
+      span <%= quotes %>
