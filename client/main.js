@@ -5,6 +5,10 @@ var Todo = Backbone.Model.extend({
   }
 });
 
+var TodoCollection = Backbone.Collection.extend({
+  model : Todo
+});
+
 var TodoView = Backbone.View.extend({
   tagName: 'li',
   className: 'todo-item',
