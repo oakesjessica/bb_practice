@@ -1,15 +1,19 @@
 var Todo = Backbone.Model.extend({
   defaults: {
-    task : 'hi',
-    status : false,
-    numb : 1
+    task : 'task title',
+    status : false
+  }
+});
+
+var TodoView = Backbone.View.extend({
+  tagName: 'li',
+  className: 'todo-item',
+  //  Constructor that is automatically called when view is initialized
+  initialize: function() {
+    this.render();
   },
-  validate: function(attrs, options) {
-    if (attrs.num < 0) {
-      return 'Task must be filled out';
-    }
-  },
-  work: function() {
-    return this.get('task') + ' is ' + this.get('status');
+  //  Method that renders output for model data associated with the view
+  render: function() {
+    this.$el.html(this.model.get('task'));
   }
 });
