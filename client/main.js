@@ -1,30 +1,17 @@
 var Todo = Backbone.Model.extend({
   defaults: {
-    tasks : 'task title',
+    tasks : 'empty title',
     status : false
   }
 });
 
-var TodoCollection = Backbone.Collection.extend({
+var TodoList = Backbone.Collection.extend({
+  //  Reference to model, url 'get'
   model : Todo,
   url: 'todos'
 });
-// var todos = new TodoCollection([
-// 	{
-// 		tasks: 'task1',
-// 		status: false
-// 	},
-// 	{
-// 		tasks: 'task2',
-// 		age: false
-// 	},
-// 	{
-// 		tasks: 'task3',
-// 		age: false
-// 	}
-// ]);
-//  default tagname is 'div'
 
+//  default tagname is 'div'
 var TodoView = Backbone.View.extend({
   tagName: 'li',
   className: 'todo-item',
@@ -41,6 +28,9 @@ var TodoView = Backbone.View.extend({
 
 var TodoListView = Backbone.View.extend({
   tagName: 'ul',
+  initialize: function() {
+    this.collection.bind('reset', this.render, this);
+  },
   render: function() {
     //  Loop over collection
     this.collection.forEach(function(t) {
@@ -52,4 +42,33 @@ var TodoListView = Backbone.View.extend({
     return this;  //  return this for chaining (thus eliminating initalize from this function)
   }
 
-})
+}); //  TodoListView
+
+
+//  Practice view w/o data
+var view = Backbone.View.extend({
+  tagName: 'p',
+  className: 'hi',
+    initialize: function() {
+      this.render();
+  },
+  render: function() {
+    this.$el.html('hello');
+  }
+});
+
+// $(function() {
+//   var todos = new TodoCollection();
+//   console.log(todos.fetch().toJSON());
+//   console.log(todos);
+//   var todosView = new TodoListView({ collection: todos});
+// });
+
+//  jQuery ready
+$(function() {
+  console.log('hello world');
+  var v = new view();
+  console.log(v.el);
+  // $(document.body).append();
+  $(document.body).append(v.el)
+});
